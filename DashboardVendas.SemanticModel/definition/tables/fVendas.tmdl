@@ -75,6 +75,24 @@ table fVendas
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
+	column CustoUnitario = RELATED(dProduto[CustoUnitario] )  * fVendas[QtdItens]
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 0fc5c349-2d6b-4891-9b85-14a8c929f4a3
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column VendaTotal = fVendas[QtdItens] * fVendas[PrecoUnitario]
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: ed20f522-550a-4f31-8f27-a4d1f6aefd27
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
 	partition fVendas = m
 		mode: import
 		source =

@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["fVendas","dVendedor","dProduto1"]
+annotation PBI_QueryOrder = ["fVendas","dVendedor","dProduto","fMetas"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -17,7 +17,9 @@ annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
 ref table fVendas
 ref table dCcalendario
 ref table dVendedor
-ref table dProduto1
+ref table dProduto
+ref table fMetas
+ref table Medidas
 
 ref cultureInfo pt-BR
 

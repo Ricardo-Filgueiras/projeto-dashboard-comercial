@@ -8,5 +8,5 @@ relationship AutoDetected_72073f62-1a7e-4819-bacf-3802b716ab26
 
 relationship a587ca97-8134-89f8-cdfb-864ac866df5c
 	fromColumn: fVendas.cdProduto
-	toColumn: dProduto1.'Cod Produto'
+	toColumn: dProduto.'Cod Produto'
 

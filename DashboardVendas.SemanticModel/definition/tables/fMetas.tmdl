@@ -1,0 +1,68 @@
+table fMetas
+	lineageTag: 1aa75948-36e0-4981-af36-5b4719a95147
+
+	column Mês
+		dataType: string
+		lineageTag: df38528f-a7cb-4cba-81f7-1b672f3b8616
+		summarizeBy: none
+		sourceColumn: Mês
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		dataType: string
+		lineageTag: 7a9c504d-429a-41c7-add2-7dc12993a5a4
+		summarizeBy: none
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vendedor
+		dataType: string
+		lineageTag: 9220556c-dced-4658-a92c-1ad5b3123116
+		summarizeBy: none
+		sourceColumn: Vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Meta Faturamento'
+		dataType: string
+		lineageTag: 8eaeaaca-b90d-428e-bed0-6812cdc54331
+		summarizeBy: none
+		sourceColumn: Meta Faturamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Meta Margem Bruta'
+		dataType: string
+		lineageTag: 8ec7a8c0-0722-4d91-9360-73bd4bffb914
+		summarizeBy: none
+		sourceColumn: Meta Margem Bruta
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Meta Notas Emitidas'
+		dataType: string
+		lineageTag: 8d8f3b26-8a5b-488a-a3b7-e9d73d40dd5b
+		summarizeBy: none
+		sourceColumn: Meta Notas Emitidas
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fMetas = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Ricar\OneDrive\Documentos\GitHub\projeto-dashboard-vendas\BaseDados\Metas.xlsx"), null, true),
+				    #"Colunas Removidas" = Table.RemoveColumns(Fonte,{"Item", "Kind", "Hidden", "Name"}),
+				    #"Data Expandido" = Table.ExpandTableColumn(#"Colunas Removidas", "Data", {"Column1", "Column2", "Column3", "Column4", "Column5", "Column6"}, {"Data.Column1", "Data.Column2", "Data.Column3", "Data.Column4", "Data.Column5", "Data.Column6"}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Data Expandido", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Mês", type text}, {"Ano", type any}, {"Vendedor", type text}, {"Meta Faturamento", type any}, {"Meta Margem Bruta", type any}, {"Meta Notas Emitidas", type any}}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Tipo Alterado", each ([Mês] <> "Mês"))
+				in
+				    #"Linhas Filtradas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -29,6 +29,7 @@ table dVendedor
 	column Foto
 		dataType: string
 		lineageTag: 6edf7676-dbad-4a89-a218-85196a6e8e8b
+		dataCategory: ImageUrl
 		summarizeBy: none
 		sourceColumn: Foto
 

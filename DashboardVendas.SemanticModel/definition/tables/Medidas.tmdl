@@ -1,0 +1,47 @@
+table Medidas
+	lineageTag: 24eed98c-92d6-4ced-99e6-6bec43e1d802
+
+	measure 'Custo Venda' = SUMX( fVendas , RELATED( dProduto[CustoUnitario] ) * fVendas[QtdItens] )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: e704164c-9535-4309-9613-14f65cc368e6
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure faturamento = SUMX( fVendas , fVendas[QtdItens] * fVendas[PrecoUnitario] )
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 6d417417-cc8e-4616-849a-6efd6b2d773f
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Margfem bruta' = [faturamento] - [Custo Venda]
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 69358385-adb2-4612-b3f6-989bbdcc5cc7
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Rank por Vendas' =
+			
+			RANK(
+			    SKIP,
+			    ALL( dVendedor ),
+			    ORDERBY( [faturamento], DESC )
+			)
+		formatString: 0
+		lineageTag: bec46645-4425-4a04-ad52-f52a56e675cc
+
+	column Value
+		isHidden
+		formatString: 0
+		lineageTag: b692b516-b163-40e8-bb6c-edcb04e56434
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Medidas = calculated
+		mode: import
+		source = {0}
+
+	annotation PBI_Id = d15aacae9cf349d5b8095012516f9a14
+

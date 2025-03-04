@@ -1,8 +1,9 @@
-table dProduto1
+table dProduto
 	lineageTag: 83cf6d09-02c0-45c3-adcd-6b39a3dbef65
 
 	column 'Cod Produto'
-		dataType: string
+		dataType: int64
+		formatString: 0
 		lineageTag: eea960a2-57b0-4011-a6b4-c38773f00fbb
 		summarizeBy: none
 		sourceColumn: Cod Produto
@@ -34,7 +35,7 @@ table dProduto1
 		annotation SummarizationSetBy = Automatic
 
 	column CustoUnitario
-		dataType: double
+		dataType: decimal
 		lineageTag: f98563a2-28d1-48fb-b917-55fea6072a7b
 		summarizeBy: none
 		sourceColumn: CustoUnitario
@@ -43,15 +44,19 @@ table dProduto1
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	partition dProduto1 = m
+	partition dProduto = m
 		mode: import
 		source =
 				let
 				    Fonte = Excel.Workbook(File.Contents("C:\Users\Ricar\OneDrive\Documentos\GitHub\projeto-dashboard-vendas\BaseDados\Produtos.xlsx"), null, true),
 				    dProduto_Table = Fonte{[Item="dProduto",Kind="Table"]}[Data],
-				    #"Tipo Alterado" = Table.TransformColumnTypes(dProduto_Table,{{"Cod Produto", type text}, {"Grupo Produto", type text}, {"Linha Produto", type text}, {"Fornecedor", type text}, {"CustoUnitario", type number}})
+				    #"Tipo Alterado" = Table.TransformColumnTypes(dProduto_Table,{{"Cod Produto", type text}, {"Grupo Produto", type text}, {"Linha Produto", type text}, {"Fornecedor", type text}, {"CustoUnitario", type number}}),
+				    #"Texto Extraído Após o Delimitador" = Table.TransformColumns(#"Tipo Alterado", {{"Cod Produto", each Text.AfterDelimiter(_, " "), type text}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Texto Extraído Após o Delimitador",{{"Cod Produto", Int64.Type}, {"CustoUnitario", Currency.Type}})
 				in
-				    #"Tipo Alterado"
+				    #"Tipo Alterado1"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
 
