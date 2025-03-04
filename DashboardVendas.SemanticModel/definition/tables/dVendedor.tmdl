@@ -1,0 +1,49 @@
+table dVendedor
+	lineageTag: 5bd9eb1e-cd43-463e-b34e-7c68b248d14e
+
+	column cdVendedor
+		dataType: int64
+		formatString: 0
+		lineageTag: e48c0313-f8e3-4f8a-92de-977f9b24cc83
+		summarizeBy: none
+		sourceColumn: cdVendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vendedor
+		dataType: string
+		lineageTag: 2695713c-89e2-49af-875e-34d09a9e60bc
+		summarizeBy: none
+		sourceColumn: Vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Equipe Vendas'
+		dataType: string
+		lineageTag: 0d056530-a992-4202-acda-e2fd65394ed5
+		summarizeBy: none
+		sourceColumn: Equipe Vendas
+
+		annotation SummarizationSetBy = Automatic
+
+	column Foto
+		dataType: string
+		lineageTag: 6edf7676-dbad-4a89-a218-85196a6e8e8b
+		summarizeBy: none
+		sourceColumn: Foto
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dVendedor = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Ricar\OneDrive\Documentos\GitHub\projeto-dashboard-vendas\BaseDados\Vendedores.xlsx"), null, true),
+				    dVendedor_Sheet = Fonte{[Item="dVendedor",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(dVendedor_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"cdVendedor", Int64.Type}, {"Vendedor", type text}, {"Equipe Vendas", type text}, {"Foto", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

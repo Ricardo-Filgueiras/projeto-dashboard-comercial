@@ -1,0 +1,57 @@
+table dProduto1
+	lineageTag: 83cf6d09-02c0-45c3-adcd-6b39a3dbef65
+
+	column 'Cod Produto'
+		dataType: string
+		lineageTag: eea960a2-57b0-4011-a6b4-c38773f00fbb
+		summarizeBy: none
+		sourceColumn: Cod Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Grupo Produto'
+		dataType: string
+		lineageTag: 19252ba3-1187-4e9d-b241-623e1449a85d
+		summarizeBy: none
+		sourceColumn: Grupo Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Linha Produto'
+		dataType: string
+		lineageTag: dd658278-b8ec-4d2b-9483-4ee5e06a5295
+		summarizeBy: none
+		sourceColumn: Linha Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fornecedor
+		dataType: string
+		lineageTag: 0a403be0-e2c0-4512-b30c-40c7e00a82be
+		summarizeBy: none
+		sourceColumn: Fornecedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustoUnitario
+		dataType: double
+		lineageTag: f98563a2-28d1-48fb-b917-55fea6072a7b
+		summarizeBy: none
+		sourceColumn: CustoUnitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dProduto1 = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Ricar\OneDrive\Documentos\GitHub\projeto-dashboard-vendas\BaseDados\Produtos.xlsx"), null, true),
+				    dProduto_Table = Fonte{[Item="dProduto",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(dProduto_Table,{{"Cod Produto", type text}, {"Grupo Produto", type text}, {"Linha Produto", type text}, {"Fornecedor", type text}, {"CustoUnitario", type number}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

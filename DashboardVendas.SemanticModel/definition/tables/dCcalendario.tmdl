@@ -1,0 +1,75 @@
+table dCcalendario
+	lineageTag: 5b3cb9e4-bcb5-4e33-a3e8-2a8a7ddc775b
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: Long Date
+		lineageTag: 8f60ec72-09af-46f9-9b05-153d543197f9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Ano
+		formatString: 0
+		lineageTag: 00d709ac-1fb6-48a9-a50d-fa4e3812070f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ano]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnoMes
+		lineageTag: e36088ce-a91f-42f9-b4f7-9478a3404462
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [AnoMes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dia
+		formatString: 0
+		lineageTag: 57254aab-fb85-447c-b396-533f43213291
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dia]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		formatString: 0
+		lineageTag: 696dc29a-12e5-49e8-b3e2-25b70c193e74
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesBrev
+		lineageTag: f9b5d949-ea6d-4879-934c-a3bfc8e02ae5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MesBrev]
+		sortByColumn: Mes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCcalendario = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS(
+					CALENDARAUTO()
+					, "Ano", YEAR( [Date])
+					, "AnoMes", FORMAT( [Date], "yyyymm" )
+					, "Dia" , DAY( [Date] )
+					, "Mes" , MONTH( [Date] )
+				    , "MesBrev" , FORMAT( [Date] , "MMM" )
+				)
+
+	annotation PBI_Id = 4961d4eb666843608ae4db8e0808a0be
+

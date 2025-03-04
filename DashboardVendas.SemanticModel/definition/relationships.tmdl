@@ -1,0 +1,12 @@
+relationship 868ca385-7f66-9a47-9f54-22f7ea41e136
+	fromColumn: fVendas.Data
+	toColumn: dCcalendario.Date
+
+relationship AutoDetected_72073f62-1a7e-4819-bacf-3802b716ab26
+	fromColumn: fVendas.cdVendedor
+	toColumn: dVendedor.cdVendedor
+
+relationship a587ca97-8134-89f8-cdfb-864ac866df5c
+	fromColumn: fVendas.cdProduto
+	toColumn: dProduto1.'Cod Produto'
+

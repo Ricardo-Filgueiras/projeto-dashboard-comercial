@@ -1,0 +1,91 @@
+table fVendas
+	lineageTag: e644af48-a2a9-41a0-983d-9fa444740399
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: db45dca1-3471-4495-9a68-d4519e0c3beb
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column NFe
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c16efa6-04cd-4ab2-8af0-f9be1b555b7f
+		summarizeBy: sum
+		sourceColumn: NFe
+
+		annotation SummarizationSetBy = Automatic
+
+	column cdProduto
+		dataType: int64
+		formatString: 0
+		lineageTag: d8cd71a8-28d2-447a-a91f-8ce59fa88bb0
+		summarizeBy: none
+		sourceColumn: cdProduto
+
+		annotation SummarizationSetBy = Automatic
+
+	column cdVendedor
+		dataType: int64
+		formatString: 0
+		lineageTag: 5fbdee60-ed5d-4730-bdf6-6980f4b7e0fe
+		summarizeBy: none
+		sourceColumn: cdVendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vendedor
+		dataType: string
+		lineageTag: 237abb4b-d2c7-46d3-ab55-3c3160cc7ee5
+		summarizeBy: none
+		sourceColumn: Vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Equipe Vendas'
+		dataType: string
+		lineageTag: 85d76512-b323-45bd-a4fa-4269ef191530
+		summarizeBy: none
+		sourceColumn: Equipe Vendas
+
+		annotation SummarizationSetBy = Automatic
+
+	column QtdItens
+		dataType: int64
+		formatString: 0
+		lineageTag: d4489053-e737-423c-9449-6e5a4c9ddb17
+		summarizeBy: sum
+		sourceColumn: QtdItens
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrecoUnitario
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 49657cb7-e31a-466d-9138-591a6b57f4a4
+		summarizeBy: sum
+		sourceColumn: PrecoUnitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition fVendas = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Ricar\OneDrive\Documentos\GitHub\projeto-dashboard-vendas\BaseDados\Vendas.xlsx"), null, true),
+				    TabVendas_Table = Fonte{[Item="TabVendas",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(TabVendas_Table,{{"Data", type date}, {"NFe", Int64.Type}, {"cdProduto", Int64.Type}, {"cdVendedor", Int64.Type}, {"Vendedor", type text}, {"Equipe Vendas", type text}, {"QtdItens", Int64.Type}, {"PrecoUnitario", Currency.Type}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,12 @@
+EVALUATE
+
+
+var dCcalendario = 
+ADDCOLUMNS(
+	CALENDARAUTO()
+	, "Ano", YEAR( [Date])
+	, "AnoMes", FORMAT( [Date], "yyyymm" )
+	, "Dia" , DAY( [Date] )
+	, "Mes" , MONTH( [Date] )
+)
+return dCcalendario
