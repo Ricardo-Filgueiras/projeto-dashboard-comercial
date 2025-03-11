@@ -4,7 +4,7 @@ table dCcalendario
 
 	column Date
 		isKey
-		formatString: Long Date
+		formatString: Short Date
 		lineageTag: 8f60ec72-09af-46f9-9b05-153d543197f9
 		summarizeBy: none
 		isNameInferred
@@ -15,9 +15,10 @@ table dCcalendario
 		annotation UnderlyingDateTimeDataType = Date
 
 	column Ano
+		dataType: int64
 		formatString: 0
 		lineageTag: 00d709ac-1fb6-48a9-a50d-fa4e3812070f
-		summarizeBy: none
+		summarizeBy: sum
 		isNameInferred
 		sourceColumn: [Ano]
 
@@ -34,7 +35,7 @@ table dCcalendario
 	column Dia
 		formatString: 0
 		lineageTag: 57254aab-fb85-447c-b396-533f43213291
-		summarizeBy: none
+		summarizeBy: sum
 		isNameInferred
 		sourceColumn: [Dia]
 
@@ -43,7 +44,7 @@ table dCcalendario
 	column Mes
 		formatString: 0
 		lineageTag: 696dc29a-12e5-49e8-b3e2-25b70c193e74
-		summarizeBy: none
+		summarizeBy: sum
 		isNameInferred
 		sourceColumn: [Mes]
 
@@ -55,6 +56,12 @@ table dCcalendario
 		isNameInferred
 		sourceColumn: [MesBrev]
 		sortByColumn: Mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesAnoBrev = FORMAT( dCcalendario[Date] , "mmm / yyyy ")
+		lineageTag: 1facbdf4-02c5-49aa-9231-dece4f12acca
+		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 

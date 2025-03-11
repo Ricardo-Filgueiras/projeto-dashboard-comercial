@@ -1,0 +1,49 @@
+table auxMedidas
+	lineageTag: ed003ca2-c6ef-4ed5-b489-5e31f39d42b6
+
+	column auxMedidas
+		lineageTag: 3e588eb3-9cf4-4f32-9b34-6c6986c9c07a
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'auxMedidas Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'auxMedidas Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'auxMedidas Campos'
+		isHidden
+		lineageTag: 5a98d619-99f3-4fc3-8984-ffbeb39b2b67
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'auxMedidas Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'auxMedidas Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 283fb97e-89e9-469b-b4f7-e0a5af1c4fad
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition auxMedidas = calculated
+		mode: import
+		source =
+				{
+				    ("faturamento", NAMEOF('Medidas'[faturamento]), 0),
+				    ("Margfem bruta", NAMEOF('Medidas'[Margfem bruta]), 1),
+				    ("Notas Emitidas", NAMEOF('Medidas'[Qtde Vendas]), 2)
+				}
+
+	annotation PBI_Id = 0490b4bfc25b4ba18a2d6266c679d348
+

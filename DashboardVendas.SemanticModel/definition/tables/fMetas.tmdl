@@ -1,51 +1,64 @@
 table fMetas
 	lineageTag: 1aa75948-36e0-4981-af36-5b4719a95147
 
-	column Mês
-		dataType: string
-		lineageTag: df38528f-a7cb-4cba-81f7-1b672f3b8616
-		summarizeBy: none
-		sourceColumn: Mês
+	column 'Meta Faturamento'
+		dataType: double
+		lineageTag: 8eaeaaca-b90d-428e-bed0-6812cdc54331
+		summarizeBy: sum
+		sourceColumn: Meta Faturamento
+
+		changedProperty = DataType
 
 		annotation SummarizationSetBy = Automatic
 
-	column Ano
-		dataType: string
-		lineageTag: 7a9c504d-429a-41c7-add2-7dc12993a5a4
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Meta Margem Bruta'
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 8ec7a8c0-0722-4d91-9360-73bd4bffb914
+		summarizeBy: sum
+		sourceColumn: Meta Margem Bruta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Meta Notas Emitidas'
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 8d8f3b26-8a5b-488a-a3b7-e9d73d40dd5b
+		summarizeBy: sum
+		sourceColumn: Meta Notas Emitidas
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 87fcd97d-55ef-4c27-8667-4f7f6d2fd21e
 		summarizeBy: none
-		sourceColumn: Ano
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CodVendedor
+		dataType: string
+		lineageTag: 1e466be8-cc0e-41ab-b6c2-d0ca5b4b9195
+		summarizeBy: none
+		sourceColumn: CodVendedor
 
 		annotation SummarizationSetBy = Automatic
 
 	column Vendedor
 		dataType: string
-		lineageTag: 9220556c-dced-4658-a92c-1ad5b3123116
+		lineageTag: a2375218-d087-4f67-bd06-d092fe53345c
 		summarizeBy: none
 		sourceColumn: Vendedor
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Meta Faturamento'
-		dataType: string
-		lineageTag: 8eaeaaca-b90d-428e-bed0-6812cdc54331
-		summarizeBy: none
-		sourceColumn: Meta Faturamento
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Meta Margem Bruta'
-		dataType: string
-		lineageTag: 8ec7a8c0-0722-4d91-9360-73bd4bffb914
-		summarizeBy: none
-		sourceColumn: Meta Margem Bruta
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Meta Notas Emitidas'
-		dataType: string
-		lineageTag: 8d8f3b26-8a5b-488a-a3b7-e9d73d40dd5b
-		summarizeBy: none
-		sourceColumn: Meta Notas Emitidas
 
 		annotation SummarizationSetBy = Automatic
 
@@ -58,9 +71,15 @@ table fMetas
 				    #"Data Expandido" = Table.ExpandTableColumn(#"Colunas Removidas", "Data", {"Column1", "Column2", "Column3", "Column4", "Column5", "Column6"}, {"Data.Column1", "Data.Column2", "Data.Column3", "Data.Column4", "Data.Column5", "Data.Column6"}),
 				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Data Expandido", [PromoteAllScalars=true]),
 				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Mês", type text}, {"Ano", type any}, {"Vendedor", type text}, {"Meta Faturamento", type any}, {"Meta Margem Bruta", type any}, {"Meta Notas Emitidas", type any}}),
-				    #"Linhas Filtradas" = Table.SelectRows(#"Tipo Alterado", each ([Mês] <> "Mês"))
+				    #"Linhas Filtradas" = Table.SelectRows(#"Tipo Alterado", each ([Mês] <> "Mês")),
+				    #"Dividir Coluna por Delimitador" = Table.SplitColumn(#"Linhas Filtradas", "Vendedor", Splitter.SplitTextByDelimiter(" - ", QuoteStyle.Csv), {"Vendedor.1", "Vendedor.2"}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Dividir Coluna por Delimitador",{{"Vendedor.1", "CodVendedor"}, {"Vendedor.2", "Vendedor"}}),
+				    #"Colunas Mescladas" = Table.CombineColumns(Table.TransformColumnTypes(#"Colunas Renomeadas", {{"Ano", type text}}, "pt-BR"),{"Mês", "Ano"},Combiner.CombineTextByDelimiter("/", QuoteStyle.None),"Mesclado"),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Colunas Mescladas",{{"Mesclado", type date}}),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Tipo Alterado1",{{"Mesclado", "Data"}}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Colunas Renomeadas1",{{"Meta Faturamento", Currency.Type}, {"Meta Margem Bruta", Currency.Type}, {"Meta Notas Emitidas", Currency.Type}})
 				in
-				    #"Linhas Filtradas"
+				    #"Tipo Alterado2"
 
 	annotation PBI_NavigationStepName = Navegação
 

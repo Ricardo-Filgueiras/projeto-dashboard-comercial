@@ -3,18 +3,21 @@ table Medidas
 
 	measure 'Custo Venda' = SUMX( fVendas , RELATED( dProduto[CustoUnitario] ) * fVendas[QtdItens] )
 		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Medidas Base
 		lineageTag: e704164c-9535-4309-9613-14f65cc368e6
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
 	measure faturamento = SUMX( fVendas , fVendas[QtdItens] * fVendas[PrecoUnitario] )
 		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Medidas Base
 		lineageTag: 6d417417-cc8e-4616-849a-6efd6b2d773f
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
 	measure 'Margfem bruta' = [faturamento] - [Custo Venda]
 		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		displayFolder: Medidas Base
 		lineageTag: 69358385-adb2-4612-b3f6-989bbdcc5cc7
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
@@ -27,7 +30,167 @@ table Medidas
 			    ORDERBY( [faturamento], DESC )
 			)
 		formatString: 0
+		displayFolder: Medidas Base
 		lineageTag: bec46645-4425-4a04-ad52-f52a56e675cc
+
+	measure 'Qtde Vendas' = DISTINCTCOUNT( fVendas[NFe])
+		formatString: 0
+		displayFolder: Medidas Base
+		lineageTag: 208ddc47-c745-4bf0-b66b-eed410af5350
+
+	measure 'faturamento YoY' =
+			
+			VAR _cal =
+			CALCULATE(
+			     [faturamento] ,
+			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			)
+			VAR _result = IF( _cal = BLANK() , " -- ", _cal )
+			
+			RETURN _result
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: Ultimo Ano
+		lineageTag: 88e36f9c-6e20-421d-8900-b4b445044ab7
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Margen Bruta YoY' =
+			
+			VAR _cal =
+			CALCULATE(
+			     [Margfem bruta] ,
+			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			)
+			VAR _result = IF( _cal = BLANK() , " -- ", _cal )
+			
+			RETURN _result
+		displayFolder: Ultimo Ano
+		lineageTag: 303b31f3-fbc4-4a28-a0ce-cddbcb7558c6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Qtde Vendas YoY' =
+			
+			VAR _cal =
+			CALCULATE(
+			     [Qtde Vendas] ,
+			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			)
+			VAR _result = IF( _cal = BLANK() , " -- ", _cal )
+			
+			RETURN _result
+		displayFolder: Ultimo Ano
+		lineageTag: 0c61daf1-8bf2-4777-b0af-7a2c47f7e6fa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Formatação Condicional  melhor Mes' = ```
+			1 
+			```
+		formatString: 0
+		displayFolder: Formatação
+		lineageTag: 3113a8b2-861d-4c18-88f1-90ef67adb2e5
+
+	measure 'ano escolhido' = "DE" &" "& SELECTEDVALUE( dCcalendario[Ano] )
+		displayFolder: Formatação
+		lineageTag: 59a8421b-9dc5-4201-97b4-f7763ec36e7a
+
+	measure 'Cor Grafico' = ```
+			
+			VAR _caso01 =
+			SWITCH( 
+			    SELECTEDVALUE( auxMedidas[auxMedidas Pedido] )
+			    , 2 , "#14acff"
+			    , 1 , "#5554fe"
+			    , 0 , "#6B12b9"
+			)
+			
+			VAR _caso02 =
+			SWITCH( 
+			    TRUE()
+			    , SELECTEDVALUE( auxMedidas[auxMedidas Pedido] ) = 2 && [Qtde Vendas LY percent %] >= 0  , "#14acff"
+			    , SELECTEDVALUE( auxMedidas[auxMedidas Pedido] ) = 2 && [Qtde Vendas LY percent %] < 0 , "red"
+			    , SELECTEDVALUE( auxMedidas[auxMedidas Pedido] ) = 1 && [Margem Bruta LY percent %] >= 0 , "#5554fe"
+			    , SELECTEDVALUE( auxMedidas[auxMedidas Pedido] ) = 1 && [Margem Bruta LY percent %] < 0  , "red"
+			    , SELECTEDVALUE( auxMedidas[auxMedidas Pedido] ) = 0 && [faturamento LY percent %] >= 0 , "#6B12b9"
+			    , SELECTEDVALUE( auxMedidas[auxMedidas Pedido] ) = 0 && [faturamento LY percent %] < 0  , "red"
+			    , "blue"
+			
+			)
+			
+			
+			
+			RETURN _caso02 
+			```
+		displayFolder: Formatação
+		lineageTag: 96613610-1a04-4fc9-901e-1d350a071e66
+
+	measure 'Medida selecionadas V1' = ```
+			
+			SWITCH( 
+			    SELECTEDVALUE( auxMedidas[auxMedidas Pedido] )
+			    , 2 , [Qtde Vendas YoY]
+			    , 1 , [Margen Bruta YoY]
+			    , 0 , [faturamento YoY]
+			)
+			```
+		lineageTag: 7ee1d2c4-cbda-4490-9f4a-a859564f3db3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'faturamento LY percent %' =
+			
+			VAR _cal =
+			CALCULATE(
+			     [faturamento] ,
+			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			)
+			VAR _result = IF( _cal = BLANK() , " -- ", _cal )
+			
+			RETURN DIVIDE( [faturamento] - _cal , _cal )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Ultimo Ano
+		lineageTag: adb64d1d-a533-43ff-b216-cbd50ce3c545
+
+	measure 'Margem Bruta LY percent %' =
+			
+			VAR _cal =
+			CALCULATE(
+			     [Margfem bruta] ,
+			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			)
+			
+			
+			RETURN DIVIDE( [Margfem bruta] - _cal , _cal )
+		displayFolder: Ultimo Ano
+		lineageTag: cb4ed206-a546-4c91-8ca4-484eabef4add
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Qtde Vendas LY percent %' =
+			
+			VAR _cal =
+			CALCULATE(
+			     [Qtde Vendas] ,
+			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			)
+			
+			
+			RETURN DIVIDE( [Qtde Vendas] - _cal , _cal )
+		displayFolder: Ultimo Ano
+		lineageTag: af68d588-30f8-40a4-be35-8bca0e9101dc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'meta Faturamentro' = SUM( fMetas[Meta Faturamento] )
+		formatString: 0
+		displayFolder: Metas
+		lineageTag: 98aa416c-dce3-4a9f-9f25-092447466586
+
+	measure 'Meta Faturamento percent %' = DIVIDE( [faturamento] , [meta Faturamentro])
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		displayFolder: Metas
+		lineageTag: 58060918-9597-40df-816e-141901cad329
 
 	column Value
 		isHidden

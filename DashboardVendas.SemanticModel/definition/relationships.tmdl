@@ -10,3 +10,11 @@ relationship a587ca97-8134-89f8-cdfb-864ac866df5c
 	fromColumn: fVendas.cdProduto
 	toColumn: dProduto.'Cod Produto'
 
+relationship de6a096f-1144-8da2-f920-d733cf578817
+	fromColumn: fMetas.Data
+	toColumn: dCcalendario.Date
+
+relationship 5f3d408d-10a3-945a-7b11-768c4b84c665
+	fromColumn: fMetas.CodVendedor
+	toColumn: dVendedor.cdVendedor
+

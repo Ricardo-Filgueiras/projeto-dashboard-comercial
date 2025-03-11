@@ -69,6 +69,16 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "auxMedidas",
+          "nodeLineageTag": "ed003ca2-c6ef-4ed5-b489-5e31f39d42b6",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Todas as tabelas",
@@ -81,7 +91,7 @@
     {
       "ordinal": 1,
       "scrollPosition": {
-        "x": 0,
+        "x": 61,
         "y": 0
       },
       "nodes": [
@@ -132,6 +142,19 @@
           "nodeIndex": "dProduto",
           "size": {
             "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 787,
+            "y": 406
+          },
+          "nodeIndex": "fMetas",
+          "nodeLineageTag": "1aa75948-36e0-4981-af36-5b4719a95147",
+          "size": {
+            "height": 248,
             "width": 234
           },
           "zIndex": 0

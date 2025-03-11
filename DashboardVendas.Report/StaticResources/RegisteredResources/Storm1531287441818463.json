@@ -510,6 +510,64 @@
           }
         ]
       }
+    },
+    "*": {
+      "*": {
+        "visualTooltip": [
+          {
+            "themedTitleFontColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "themedValueFontColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "themedBackground": {
+              "solid": {
+                "color": "#3F6BC4"
+              }
+            },
+            "actionFontColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            }
+          }
+        ],
+        "visualHeaderTooltip": [
+          {
+            "themedTitleFontColor": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "themedBackground": {
+              "solid": {
+                "color": "#3F6BC4"
+              }
+            }
+          }
+        ]
+      }
     }
-  }
+  },
+  "textClasses": {
+    "label": {
+      "color": "#FFFFFF"
+    },
+    "callout": {
+      "color": "#F4F4F4"
+    },
+    "title": {
+      "color": "#F9F6F6"
+    },
+    "header": {
+      "color": "#FFFFFF"
+    }
+  },
+  "foreground": "#EEEEEE",
+  "foregroundNeutralSecondary": "#000000"
 }

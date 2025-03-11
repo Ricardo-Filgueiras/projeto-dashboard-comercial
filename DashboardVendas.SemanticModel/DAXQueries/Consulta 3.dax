@@ -1,0 +1,6 @@
+EVALUATE
+
+CALCULATETABLE(
+	SUMMARIZE( fVendas  , dCcalendario[MesBrev] , dCcalendario[MesAnoBrev], dCcalendario[Ano] ,"vlr", SUM( fVendas[VendaTotal]) )
+	, dCcalendario[Ano] = 2020
+) ORDER BY [vlr] DESC
