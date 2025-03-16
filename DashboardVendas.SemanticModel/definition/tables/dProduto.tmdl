@@ -48,7 +48,7 @@ table dProduto
 		mode: import
 		source =
 				let
-				    Fonte = Excel.Workbook(File.Contents("C:\Users\Ricar\OneDrive\Documentos\GitHub\projeto-dashboard-vendas\BaseDados\Produtos.xlsx"), null, true),
+				    Fonte = Excel.Workbook(File.Contents(PastaCaminhoArquivo & "Produtos.xlsx"), null, true),
 				    dProduto_Table = Fonte{[Item="dProduto",Kind="Table"]}[Data],
 				    #"Tipo Alterado" = Table.TransformColumnTypes(dProduto_Table,{{"Cod Produto", type text}, {"Grupo Produto", type text}, {"Linha Produto", type text}, {"Fornecedor", type text}, {"CustoUnitario", type number}}),
 				    #"Texto Extraído Após o Delimitador" = Table.TransformColumns(#"Tipo Alterado", {{"Cod Produto", each Text.AfterDelimiter(_, " "), type text}}),

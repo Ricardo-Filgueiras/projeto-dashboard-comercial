@@ -66,7 +66,7 @@ table fMetas
 		mode: import
 		source =
 				let
-				    Fonte = Excel.Workbook(File.Contents("C:\Users\Ricar\OneDrive\Documentos\GitHub\projeto-dashboard-vendas\BaseDados\Metas.xlsx"), null, true),
+				    Fonte = Excel.Workbook(File.Contents(PastaCaminhoArquivo & "Metas.xlsx"), null, true),
 				    #"Colunas Removidas" = Table.RemoveColumns(Fonte,{"Item", "Kind", "Hidden", "Name"}),
 				    #"Data Expandido" = Table.ExpandTableColumn(#"Colunas Removidas", "Data", {"Column1", "Column2", "Column3", "Column4", "Column5", "Column6"}, {"Data.Column1", "Data.Column2", "Data.Column3", "Data.Column4", "Data.Column5", "Data.Column6"}),
 				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Data Expandido", [PromoteAllScalars=true]),

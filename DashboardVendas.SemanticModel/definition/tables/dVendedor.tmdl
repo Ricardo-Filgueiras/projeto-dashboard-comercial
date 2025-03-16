@@ -39,7 +39,7 @@ table dVendedor
 		mode: import
 		source =
 				let
-				    Fonte = Excel.Workbook(File.Contents("C:\Users\Ricar\OneDrive\Documentos\GitHub\projeto-dashboard-vendas\BaseDados\Vendedores.xlsx"), null, true),
+				    Fonte = Excel.Workbook(File.Contents(PastaCaminhoArquivo & "Vendedores.xlsx"), null, true),
 				    dVendedor_Sheet = Fonte{[Item="dVendedor",Kind="Sheet"]}[Data],
 				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(dVendedor_Sheet, [PromoteAllScalars=true]),
 				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"cdVendedor", Int64.Type}, {"Vendedor", type text}, {"Equipe Vendas", type text}, {"Foto", type text}})
@@ -47,4 +47,6 @@ table dVendedor
 				    #"Tipo Alterado"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
 

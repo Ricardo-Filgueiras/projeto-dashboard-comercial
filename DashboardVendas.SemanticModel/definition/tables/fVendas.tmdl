@@ -97,7 +97,7 @@ table fVendas
 		mode: import
 		source =
 				let
-				    Fonte = Excel.Workbook(File.Contents("C:\Users\Ricar\OneDrive\Documentos\GitHub\projeto-dashboard-vendas\BaseDados\Vendas.xlsx"), null, true),
+				    Fonte = Excel.Workbook(File.Contents(PastaCaminhoArquivo & "Vendas.xlsx" ), null, true),
 				    TabVendas_Table = Fonte{[Item="TabVendas",Kind="Table"]}[Data],
 				    #"Tipo Alterado" = Table.TransformColumnTypes(TabVendas_Table,{{"Data", type date}, {"NFe", Int64.Type}, {"cdProduto", Int64.Type}, {"cdVendedor", Int64.Type}, {"Vendedor", type text}, {"Equipe Vendas", type text}, {"QtdItens", Int64.Type}, {"PrecoUnitario", Currency.Type}})
 				in
