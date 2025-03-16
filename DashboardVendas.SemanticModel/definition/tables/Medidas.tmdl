@@ -192,6 +192,16 @@ table Medidas
 		displayFolder: Metas
 		lineageTag: 58060918-9597-40df-816e-141901cad329
 
+	measure 'Meta Margem bruta percent %' = DIVIDE( [Margfem bruta] , SUM( fMetas[Meta Margem Bruta] ))
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Metas
+		lineageTag: ac5ac259-b415-4339-95ff-921623a4f93e
+
+	measure 'Meta Qtde Vendas percent %' = DIVIDE( [Qtde Vendas] , SUM( fMetas[Meta Notas Emitidas] ))
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Metas
+		lineageTag: bb96d72d-706f-4376-84b5-1b1b52c186d4
+
 	column Value
 		isHidden
 		formatString: 0

@@ -1037,16 +1037,6 @@ cultureInfo pt-BR
 			          "qtde vendas": {
 			            "State": "Generated"
 			          }
-			        },
-			        {
-			          "Notas Emitidas": {
-			            "State": "Suggested",
-			            "Source": {
-			              "Type": "External",
-			              "Agent": "PowerBI.VisualColumnRename"
-			            },
-			            "Weight": 0.9
-			          }
 			        }
 			      ]
 			    },
@@ -1178,12 +1168,12 @@ cultureInfo pt-BR
 			      "State": "Generated",
 			      "Terms": [
 			        {
-			          "faturamento YoY percent %": {
+			          "faturamento LY percent %": {
 			            "State": "Generated"
 			          }
 			        },
 			        {
-			          "faturamento yoy percent percentage": {
+			          "faturamento ly percent percentage": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
@@ -1193,7 +1183,7 @@ cultureInfo pt-BR
 			          }
 			        },
 			        {
-			          "faturamento yoy percent pct": {
+			          "faturamento ly percent pct": {
 			            "Type": "Noun",
 			            "State": "Suggested",
 			            "Source": {
@@ -1316,9 +1306,693 @@ cultureInfo pt-BR
 			          }
 			        }
 			      ]
+			    },
+			    "f_meta.data": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fMetas",
+			          "ConceptualProperty": "Data"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "data": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "information": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "fact": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "info": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "statistic": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "document": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "figure": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        },
+			        {
+			          "record": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.714
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "f_meta.cod_vendedor": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fMetas",
+			          "ConceptualProperty": "CodVendedor"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "cod vendedor": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "CodVendedor": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "f_meta.vendedor": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "fMetas",
+			          "ConceptualProperty": "Vendedor"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "vendedor": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.margem_bruta_LY_percent_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Margem Bruta LY percent %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "margem bruta LY percent %": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "margem bruta ly percent percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.78
+			          }
+			        },
+			        {
+			          "margem bruta ly percent pct": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.757
+			          }
+			        }
+			      ]
+			    },
+			    "medida.qtde_vendas_LY_percent_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Qtde Vendas LY percent %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "qtde vendas LY percent %": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "qtde venda ly percent percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.78
+			          }
+			        },
+			        {
+			          "qtde venda ly percent pct": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.757
+			          }
+			        }
+			      ]
+			    },
+			    "medida.meta_faturamentro": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "meta Faturamentro"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "meta faturamentro": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.meta_faturamento_percent_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Meta Faturamento percent %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "meta faturamento percent %": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "meta faturamento percent percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.771
+			          }
+			        },
+			        {
+			          "meta faturamento percent pct": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.748
+			          }
+			        },
+			        {
+			          "Meta %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medida.meta_margem_bruta_percent_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Meta Margem bruta percent %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "meta margem bruta percent %": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "meta margem bruta percent percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.78
+			          }
+			        },
+			        {
+			          "meta margem bruta percent pct": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.757
+			          }
+			        }
+			      ]
+			    },
+			    "medida.meta_qtde_vendas_percent_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Meta Qtde Vendas percent %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "meta qtde vendas percent %": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "meta qtde venda percent percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.78
+			          }
+			        },
+			        {
+			          "meta qtde venda percent pct": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.757
+			          }
+			        }
+			      ]
 			    }
 			  },
 			  "Relationships": {
+			    "f_meta_has_medida_meta_qtde_vendas_percent_": {
+			      "Binding": {
+			        "ConceptualEntity": "fMetas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "f_meta": {
+			          "Target": {
+			            "Entity": "f_meta"
+			          }
+			        },
+			        "medida.meta_qtde_vendas_percent_": {
+			          "Target": {
+			            "Entity": "medida.meta_qtde_vendas_percent_"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "f_meta"
+			            },
+			            "Object": {
+			              "Role": "medida.meta_qtde_vendas_percent_"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "f_meta_have_meta_qtde_vendas_percent_"
+			        }
+			      ]
+			    },
+			    "medida_has_meta_margem_bruta_percent_": {
+			      "Binding": {
+			        "ConceptualEntity": "Medidas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "medida": {
+			          "Target": {
+			            "Entity": "medida"
+			          }
+			        },
+			        "medida.meta_margem_bruta_percent_": {
+			          "Target": {
+			            "Entity": "medida.meta_margem_bruta_percent_"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "medida"
+			            },
+			            "Object": {
+			              "Role": "medida.meta_margem_bruta_percent_"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "medidas_have_meta_margem_bruta_percent_"
+			        }
+			      ]
+			    },
+			    "f_venda_has_medida_meta_faturamento_percent_": {
+			      "Binding": {
+			        "ConceptualEntity": "fVendas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "f_venda": {
+			          "Target": {
+			            "Entity": "f_venda"
+			          }
+			        },
+			        "medida.meta_faturamento_percent_": {
+			          "Target": {
+			            "Entity": "medida.meta_faturamento_percent_"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "f_venda"
+			            },
+			            "Object": {
+			              "Role": "medida.meta_faturamento_percent_"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "f_venda_have_meta_faturamento_percent_"
+			        }
+			      ]
+			    },
+			    "f_meta_has_medida_meta_faturamento_percent_": {
+			      "Binding": {
+			        "ConceptualEntity": "fMetas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "f_meta": {
+			          "Target": {
+			            "Entity": "f_meta"
+			          }
+			        },
+			        "medida.meta_faturamento_percent_": {
+			          "Target": {
+			            "Entity": "medida.meta_faturamento_percent_"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "f_meta"
+			            },
+			            "Object": {
+			              "Role": "medida.meta_faturamento_percent_"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "f_meta_have_meta_faturamento_percent_"
+			        }
+			      ]
+			    },
+			    "f_meta_has_medida_meta_faturamentro": {
+			      "Binding": {
+			        "ConceptualEntity": "fMetas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "f_meta": {
+			          "Target": {
+			            "Entity": "f_meta"
+			          }
+			        },
+			        "medida.meta_faturamentro": {
+			          "Target": {
+			            "Entity": "medida.meta_faturamentro"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "f_meta"
+			            },
+			            "Object": {
+			              "Role": "medida.meta_faturamentro"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "f_meta_have_meta_faturamentro"
+			        }
+			      ]
+			    },
+			    "f_venda_has_medida_qtde_vendas_LY_percent_": {
+			      "Binding": {
+			        "ConceptualEntity": "fVendas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "f_venda": {
+			          "Target": {
+			            "Entity": "f_venda"
+			          }
+			        },
+			        "medida.qtde_vendas_LY_percent_": {
+			          "Target": {
+			            "Entity": "medida.qtde_vendas_LY_percent_"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "f_venda"
+			            },
+			            "Object": {
+			              "Role": "medida.qtde_vendas_LY_percent_"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "f_venda_have_qtde_vendas_LY_percent_"
+			        }
+			      ]
+			    },
+			    "medida_has_margem_bruta_LY_percent_": {
+			      "Binding": {
+			        "ConceptualEntity": "Medidas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "medida": {
+			          "Target": {
+			            "Entity": "medida"
+			          }
+			        },
+			        "medida.margem_bruta_LY_percent_": {
+			          "Target": {
+			            "Entity": "medida.margem_bruta_LY_percent_"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "medida"
+			            },
+			            "Object": {
+			              "Role": "medida.margem_bruta_LY_percent_"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "medidas_have_margem_bruta_LY_percent_"
+			        }
+			      ]
+			    },
+			    "f_meta_has_vendedor": {
+			      "Binding": {
+			        "ConceptualEntity": "fMetas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "f_meta": {
+			          "Target": {
+			            "Entity": "f_meta"
+			          }
+			        },
+			        "f_meta.vendedor": {
+			          "Target": {
+			            "Entity": "f_meta.vendedor"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "f_meta"
+			            },
+			            "Object": {
+			              "Role": "f_meta.vendedor"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "f_meta_have_vendedors"
+			        }
+			      ]
+			    },
+			    "f_meta_has_data": {
+			      "Binding": {
+			        "ConceptualEntity": "fMetas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "f_meta": {
+			          "Target": {
+			            "Entity": "f_meta"
+			          }
+			        },
+			        "f_meta.data": {
+			          "Target": {
+			            "Entity": "f_meta.data"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "f_meta"
+			            },
+			            "Object": {
+			              "Role": "f_meta.data"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "f_meta_have_data"
+			        }
+			      ]
+			    },
+			    "aux_medida_has_aux_medida": {
+			      "Binding": {
+			        "ConceptualEntity": "auxMedidas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "aux_medida": {
+			          "Target": {
+			            "Entity": "aux_medida"
+			          }
+			        },
+			        "aux_medida.aux_medida": {
+			          "Target": {
+			            "Entity": "aux_medida.aux_medida"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "aux_medida"
+			            },
+			            "Object": {
+			              "Role": "aux_medida.aux_medida"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "aux_medidas_have_aux_medidas"
+			        },
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "aux_medida"
+			            },
+			            "Name": {
+			              "Role": "aux_medida.aux_medida"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "aux_medidas_are_names_IDs_of_aux_medidas"
+			        }
+			      ]
+			    },
 			    "f_venda_has_medida_faturamento_YoY_percent_": {
 			      "Binding": {
 			        "ConceptualEntity": "fVendas"
@@ -1348,7 +2022,7 @@ cultureInfo pt-BR
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "f_venda_have_faturamento_YoY_percent_"
+			          "ID": "f_venda_have_faturamento_LY_percent_"
 			        }
 			      ]
 			    },
@@ -1778,6 +2452,33 @@ cultureInfo pt-BR
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "f_meta_have_meta_notas_emitidas"
+			        },
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "f_meta"
+			            },
+			            "Adjectives": [
+			              {
+			                "expensive": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Antonyms": [
+			              {
+			                "cheap": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Measurement": {
+			              "Role": "f_meta.meta_notas_emitida"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "meta_notas_emitida_indicates_how_expensive_f_meta_are"
 			        }
 			      ]
 			    },
@@ -1811,6 +2512,33 @@ cultureInfo pt-BR
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "f_meta_have_meta_margem_brutas"
+			        },
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "f_meta"
+			            },
+			            "Adjectives": [
+			              {
+			                "expensive": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Antonyms": [
+			              {
+			                "cheap": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Measurement": {
+			              "Role": "f_meta.meta_margem_bruta"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "meta_margem_bruta_indicates_how_expensive_f_meta_are"
 			        }
 			      ]
 			    },
@@ -1844,105 +2572,6 @@ cultureInfo pt-BR
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "f_meta_have_meta_faturamentos"
-			        }
-			      ]
-			    },
-			    "f_meta_has_vendedor": {
-			      "Binding": {
-			        "ConceptualEntity": "fMetas"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "f_meta": {
-			          "Target": {
-			            "Entity": "f_meta"
-			          }
-			        },
-			        "f_meta.vendedor": {
-			          "Target": {
-			            "Entity": "f_meta.vendedor"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "f_meta"
-			            },
-			            "Object": {
-			              "Role": "f_meta.vendedor"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "f_meta_have_vendedors"
-			        }
-			      ]
-			    },
-			    "f_meta_has_ano": {
-			      "Binding": {
-			        "ConceptualEntity": "fMetas"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "f_meta": {
-			          "Target": {
-			            "Entity": "f_meta"
-			          }
-			        },
-			        "f_meta.ano": {
-			          "Target": {
-			            "Entity": "f_meta.ano"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "f_meta"
-			            },
-			            "Object": {
-			              "Role": "f_meta.ano"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "f_meta_have_anos"
-			        }
-			      ]
-			    },
-			    "f_meta_has_mê": {
-			      "Binding": {
-			        "ConceptualEntity": "fMetas"
-			      },
-			      "State": "Generated",
-			      "Roles": {
-			        "f_meta": {
-			          "Target": {
-			            "Entity": "f_meta"
-			          }
-			        },
-			        "f_meta.mê": {
-			          "Target": {
-			            "Entity": "f_meta.mê"
-			          }
-			        }
-			      },
-			      "Phrasings": [
-			        {
-			          "Attribute": {
-			            "Subject": {
-			              "Role": "f_meta"
-			            },
-			            "Object": {
-			              "Role": "f_meta.mê"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "f_meta_have_mê"
 			        }
 			      ]
 			    },
@@ -2819,49 +3448,36 @@ cultureInfo pt-BR
 			        }
 			      ]
 			    },
-			    "aux_medida_is_named_aux_medida": {
+			    "f_venda_has_medida_meta_qtde_vendas_percent_": {
 			      "Binding": {
-			        "ConceptualEntity": "auxMedidas"
+			        "ConceptualEntity": "fVendas"
 			      },
 			      "State": "Generated",
 			      "Roles": {
-			        "aux_medida": {
+			        "f_venda": {
 			          "Target": {
-			            "Entity": "aux_medida"
+			            "Entity": "f_venda"
 			          }
 			        },
-			        "aux_medida.aux_medida": {
+			        "medida.meta_qtde_vendas_percent_": {
 			          "Target": {
-			            "Entity": "aux_medida.aux_medida"
+			            "Entity": "medida.meta_qtde_vendas_percent_"
 			          }
 			        }
 			      },
 			      "Phrasings": [
 			        {
-			          "Name": {
-			            "Subject": {
-			              "Role": "aux_medida"
-			            },
-			            "Name": {
-			              "Role": "aux_medida.aux_medida"
-			            }
-			          },
-			          "State": "Generated",
-			          "Weight": 0.99,
-			          "ID": "aux_medidas_are_names_IDs_of_aux_medidas"
-			        },
-			        {
 			          "Attribute": {
 			            "Subject": {
-			              "Role": "aux_medida"
+			              "Role": "f_venda"
 			            },
 			            "Object": {
-			              "Role": "aux_medida.aux_medida"
+			              "Role": "medida.meta_qtde_vendas_percent_"
 			            }
 			          },
 			          "State": "Generated",
 			          "Weight": 0.99,
-			          "ID": "aux_medidas_have_aux_medidas"
+			          "ID": "f_venda_have_meta_qtde_vendas_percent_"
 			        }
 			      ]
 			    },
@@ -3007,6 +3623,105 @@ cultureInfo pt-BR
 			          "State": "Generated",
 			          "Weight": 0.99,
 			          "ID": "d_produtos_have_f_venda"
+			        }
+			      ]
+			    },
+			    "f_meta_has_d_ccalendario": {
+			      "Binding": {
+			        "ConceptualEntity": "fMetas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "f_meta": {
+			          "Target": {
+			            "Entity": "f_meta"
+			          }
+			        },
+			        "d_ccalendario": {
+			          "Target": {
+			            "Entity": "d_ccalendario"
+			          },
+			          "Nouns": [
+			            {
+			              "data": {
+			                "State": "Generated"
+			              }
+			            }
+			          ]
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "f_meta"
+			            },
+			            "Object": {
+			              "Role": "d_ccalendario"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "f_meta_have_d_ccalendarios"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "d_ccalendario"
+			            },
+			            "Object": {
+			              "Role": "f_meta"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "d_ccalendarios_have_f_meta"
+			        }
+			      ]
+			    },
+			    "f_meta_has_d_vendedor": {
+			      "Binding": {
+			        "ConceptualEntity": "fMetas"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "f_meta": {
+			          "Target": {
+			            "Entity": "f_meta"
+			          }
+			        },
+			        "d_vendedor": {
+			          "Target": {
+			            "Entity": "d_vendedor"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "f_meta"
+			            },
+			            "Object": {
+			              "Role": "d_vendedor"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "f_meta_have_d_vendedors"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "d_vendedor"
+			            },
+			            "Object": {
+			              "Role": "f_meta"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "d_vendedors_have_f_meta"
 			        }
 			      ]
 			    }

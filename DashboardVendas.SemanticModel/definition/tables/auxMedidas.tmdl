@@ -40,7 +40,7 @@ table auxMedidas
 		mode: import
 		source =
 				{
-				    ("faturamento", NAMEOF('Medidas'[faturamento]), 0),
+				    ("Faturamento", NAMEOF('Medidas'[faturamento]), 0),
 				    ("Margfem bruta", NAMEOF('Medidas'[Margfem bruta]), 1),
 				    ("Notas Emitidas", NAMEOF('Medidas'[Qtde Vendas]), 2)
 				}
