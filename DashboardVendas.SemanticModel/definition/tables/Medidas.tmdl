@@ -202,6 +202,14 @@ table Medidas
 		displayFolder: Metas
 		lineageTag: bb96d72d-706f-4376-84b5-1b1b52c186d4
 
+	measure MedidaMin = 0
+		formatString: 0
+		lineageTag: 9bf4a672-ec4f-4833-b46f-2cca124a7f69
+
+	measure MedidaMax = 150000
+		formatString: 0
+		lineageTag: b013c687-dd10-4226-a836-1fc2e7f59d1b
+
 	column Value
 		isHidden
 		formatString: 0

@@ -10,7 +10,7 @@ annotation PBI_QueryOrder = ["fVendas","dVendedor","dProduto","fMetas","PastaCam
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBIDesktopVersion = 2.140.1476.0 (25.02)+e8c6a85d1d09735c5c055c3244a60ff4076cd2cf
+annotation PBIDesktopVersion = 2.139.2054.0 (24.12)+334ca1c95b576cc53924655643b0d36f21caac55
 
 annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
 
