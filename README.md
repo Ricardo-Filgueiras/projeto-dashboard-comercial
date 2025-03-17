@@ -1,10 +1,8 @@
 # projeto-dashboard-vendas
 
-    Contexto : Dashboard de Análise Comercial
+Contexto : Dashboard de Análise Comercial
 
-Um Dashboard de Análise Comercial é uma ferramenta visual que apresenta os principais indicadores de desempenho (KPIs) da área de vendas de forma clara e objetiva. Ele permite que gestores e equipes acompanhem o progresso das metas, identifiquem tendências e tomem decisões estratégicas com base em dados concretos.
-
-Os KPIs exibidos no dashboard são personalizados de acordo com as necessidades de cada empresa, mas neste caso, incluimos informações a seguir :
+Um Dashboard de Análise Comercial é uma ferramenta visual que apresenta os principais indicadores de desempenho (KPIs) da área de vendas de forma clara e objetiva. Ele permite que gestores e equipes acompanhem o progresso das metas, identifiquem tendências e tomem decisões estratégicas com base em dados concretos. Os KPIs exibidos no dashboard são personalizados de acordo com as necessidades de cada empresa, mas neste caso, incluimos informações a seguir :
 
 Faturamento: é todo o dinheiro que entra no caixa da empresa proveniente de suas atividades comerciais, vendas por Grupo de Produto, etc.
 
@@ -61,10 +59,17 @@ O Dashboard de Análise Comercial é uma ferramenta flexível e adaptável às n
 
 Com um Dashboard de Análise Comercial, você terá em mãos uma ferramenta poderosa para otimizar suas vendas, aumentar a receita e melhorar o desempenho da equipe comercial.
 
+## Imagens Importantes
+
+![Inicio](https://github.com/Ricardo-Filgueiras/projeto-dashboard-comercial/blob/main/BaseDados/imagens/inicio.png)
+
+![Vendas](https://github.com/Ricardo-Filgueiras/projeto-dashboard-comercial/blob/main/BaseDados/imagens/vendas.png)
 
 Links Importantes.
 
 [`Linkedin.`](https://www.linkedin.com/in/ricardo-filgueiras-b4607b232/)
 
 [`Dashboard no PowerBI.`](https://app.powerbi.com/view?r=eyJrIjoiN2M0NDRkZjgtZTEyNy00MDA4LTk2MTAtMTE1YmZkOThjMzY1IiwidCI6ImVhNmIyNzRlLTE4MmYtNDc0Yy04YWMwLTQzOWM5ZTE1Yjg3ZSJ9)
+
+[`Power BI Series - Plataforma Xperium`](https://app.xperiun.com/modulos/power-bi-series-1704330688814x136214658354854020)
 
