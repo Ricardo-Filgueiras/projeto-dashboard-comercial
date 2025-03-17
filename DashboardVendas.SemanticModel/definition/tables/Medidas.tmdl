@@ -8,8 +8,8 @@ table Medidas
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
-	measure faturamento = SUMX( fVendas , fVendas[QtdItens] * fVendas[PrecoUnitario] )
-		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+	measure faturamento = CALCULATE( SUMX( fVendas , fVendas[QtdItens] * fVendas[PrecoUnitario] ), dCalendario[Ano] = SELECTEDVALUE( dCalendario[Ano] ) )
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
 		displayFolder: Medidas Base
 		lineageTag: 6d417417-cc8e-4616-849a-6efd6b2d773f
 
@@ -33,7 +33,7 @@ table Medidas
 		displayFolder: Medidas Base
 		lineageTag: bec46645-4425-4a04-ad52-f52a56e675cc
 
-	measure 'Qtde Vendas' = DISTINCTCOUNT( fVendas[NFe])
+	measure 'Qtde Vendas' = DISTINCTCOUNT( fVendas[NFe] )
 		formatString: 0
 		displayFolder: Medidas Base
 		lineageTag: 208ddc47-c745-4bf0-b66b-eed410af5350
@@ -43,7 +43,7 @@ table Medidas
 			VAR _cal =
 			CALCULATE(
 			     [faturamento] ,
-			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			     SAMEPERIODLASTYEAR( dCalendario[Data] )
 			)
 			VAR _result = IF( _cal = BLANK() , " -- ", _cal )
 			
@@ -59,7 +59,7 @@ table Medidas
 			VAR _cal =
 			CALCULATE(
 			     [Margfem bruta] ,
-			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			     SAMEPERIODLASTYEAR( dCalendario[Data])
 			)
 			VAR _result = IF( _cal = BLANK() , " -- ", _cal )
 			
@@ -74,7 +74,7 @@ table Medidas
 			VAR _cal =
 			CALCULATE(
 			     [Qtde Vendas] ,
-			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			     SAMEPERIODLASTYEAR(dCalendario[Data])
 			)
 			VAR _result = IF( _cal = BLANK() , " -- ", _cal )
 			
@@ -91,7 +91,7 @@ table Medidas
 		displayFolder: Formatação
 		lineageTag: 3113a8b2-861d-4c18-88f1-90ef67adb2e5
 
-	measure 'ano escolhido' = "DE" &" "& SELECTEDVALUE( dCcalendario[Ano] )
+	measure 'ano escolhido' = "DE" &" "& SELECTEDVALUE( dCalendario[Ano] )
 		displayFolder: Formatação
 		lineageTag: 59a8421b-9dc5-4201-97b4-f7763ec36e7a
 
@@ -143,7 +143,7 @@ table Medidas
 			VAR _cal =
 			CALCULATE(
 			     [faturamento] ,
-			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			     SAMEPERIODLASTYEAR( dCalendario[Data] )
 			)
 			VAR _result = IF( _cal = BLANK() , " -- ", _cal )
 			
@@ -157,7 +157,7 @@ table Medidas
 			VAR _cal =
 			CALCULATE(
 			     [Margfem bruta] ,
-			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			     SAMEPERIODLASTYEAR( dCalendario[Data] )
 			)
 			
 			
@@ -172,7 +172,7 @@ table Medidas
 			VAR _cal =
 			CALCULATE(
 			     [Qtde Vendas] ,
-			     SAMEPERIODLASTYEAR( dCcalendario[Date] )
+			     SAMEPERIODLASTYEAR( dCalendario[Data] )
 			)
 			
 			
@@ -182,12 +182,12 @@ table Medidas
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'meta Faturamentro' = SUM( fMetas[Meta Faturamento] )
+	measure 'Meta Faturamentro' = SUMX( fMetas , fMetas[Meta Faturamento] )
 		formatString: 0
 		displayFolder: Metas
 		lineageTag: 98aa416c-dce3-4a9f-9f25-092447466586
 
-	measure 'Meta Faturamento percent %' = DIVIDE( [faturamento] , [meta Faturamentro])
+	measure 'Meta Faturamento percent %' = DIVIDE( [faturamento] , [Meta Faturamentro])
 		formatString: #,0.00%;-#,0.00%;#,0.00%
 		displayFolder: Metas
 		lineageTag: 58060918-9597-40df-816e-141901cad329

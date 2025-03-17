@@ -13,11 +13,12 @@ table fVendas
 		annotation UnderlyingDateTimeDataType = Date
 
 	column NFe
-		dataType: int64
-		formatString: 0
+		dataType: string
 		lineageTag: 2c16efa6-04cd-4ab2-8af0-f9be1b555b7f
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: NFe
+
+		changedProperty = DataType
 
 		annotation SummarizationSetBy = Automatic
 

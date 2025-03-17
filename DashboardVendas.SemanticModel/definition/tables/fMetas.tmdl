@@ -1,51 +1,6 @@
 table fMetas
 	lineageTag: 1aa75948-36e0-4981-af36-5b4719a95147
 
-	column 'Meta Faturamento'
-		dataType: double
-		lineageTag: 8eaeaaca-b90d-428e-bed0-6812cdc54331
-		summarizeBy: sum
-		sourceColumn: Meta Faturamento
-
-		changedProperty = DataType
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
-	column 'Meta Margem Bruta'
-		dataType: decimal
-		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
-		lineageTag: 8ec7a8c0-0722-4d91-9360-73bd4bffb914
-		summarizeBy: sum
-		sourceColumn: Meta Margem Bruta
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
-
-	column 'Meta Notas Emitidas'
-		dataType: decimal
-		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
-		lineageTag: 8d8f3b26-8a5b-488a-a3b7-e9d73d40dd5b
-		summarizeBy: sum
-		sourceColumn: Meta Notas Emitidas
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
-
-	column Data
-		dataType: dateTime
-		formatString: Long Date
-		lineageTag: 87fcd97d-55ef-4c27-8667-4f7f6d2fd21e
-		summarizeBy: none
-		sourceColumn: Data
-
-		annotation SummarizationSetBy = Automatic
-
-		annotation UnderlyingDateTimeDataType = Date
-
 	column CodVendedor
 		dataType: string
 		lineageTag: 1e466be8-cc0e-41ab-b6c2-d0ca5b4b9195
@@ -62,6 +17,77 @@ table fMetas
 
 		annotation SummarizationSetBy = Automatic
 
+	column Mês
+		dataType: int64
+		formatString: 0
+		lineageTag: c859e782-c60e-4cb6-adef-b4816fe5c8b7
+		summarizeBy: sum
+		sourceColumn: Mês
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 37414c3a-2246-45a9-a4b5-4310e87dc8a8
+		summarizeBy: sum
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: cc7d53c7-1055-4ac7-a795-fec9f22ed27f
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column qtde_dias_uteis
+		dataType: int64
+		formatString: 0
+		lineageTag: 6dfe915a-ae8d-4edf-982c-15313bb35345
+		summarizeBy: sum
+		sourceColumn: qtde_dias_uteis
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Meta Notas Emitidas'
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: d4b68e6c-3151-4d16-8639-2cd79dd517df
+		summarizeBy: sum
+		sourceColumn: Meta Notas Emitidas
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Meta Margem Bruta'
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 063abbec-25fe-460c-ad50-acfb6e7de868
+		summarizeBy: sum
+		sourceColumn: Meta Margem Bruta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Meta Faturamento'
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 88fd9370-3265-48f6-bca8-99e99b1510e1
+		summarizeBy: sum
+		sourceColumn: Meta Faturamento
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
 	partition fMetas = m
 		mode: import
 		source =
@@ -77,11 +103,23 @@ table fMetas
 				    #"Colunas Mescladas" = Table.CombineColumns(Table.TransformColumnTypes(#"Colunas Renomeadas", {{"Ano", type text}}, "pt-BR"),{"Mês", "Ano"},Combiner.CombineTextByDelimiter("/", QuoteStyle.None),"Mesclado"),
 				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Colunas Mescladas",{{"Mesclado", type date}}),
 				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Tipo Alterado1",{{"Mesclado", "Data"}}),
-				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Colunas Renomeadas1",{{"Meta Faturamento", Currency.Type}, {"Meta Margem Bruta", Currency.Type}, {"Meta Notas Emitidas", Currency.Type}})
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Colunas Renomeadas1",{{"Meta Faturamento", Currency.Type}, {"Meta Margem Bruta", Currency.Type}, {"Meta Notas Emitidas", Currency.Type}}),
+				    #"Inserted Month" = Table.AddColumn(#"Tipo Alterado2", "Mês", each Date.Month([Data]), Int64.Type),
+				    #"Inserted Year" = Table.AddColumn(#"Inserted Month", "Ano", each Date.Year([Data]), Int64.Type),
+				    #"Invoked Custom Function" = Table.AddColumn(#"Inserted Year", "qtd_dias_uteis_mes", each fx_dias_uteis_mes([Ano], [Mês])),
+				    #"Expanded {0}" = Table.ExpandTableColumn(#"Invoked Custom Function", "qtd_dias_uteis_mes", {"Data", "qtde_dias_uteis"}, {"qtd_dias_uteis_mes.Data", "qtd_dias_uteis_mes.qtde_dias_uteis"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Expanded {0}",{"Data"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"qtd_dias_uteis_mes.qtde_dias_uteis", "qtde_dias_uteis"}, {"qtd_dias_uteis_mes.Data", "Data"}}),
+				    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Meta Notas Emitidas.1", each [Meta Notas Emitidas] / [qtde_dias_uteis]),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Meta Margem Bruta.1", each [Meta Margem Bruta] /[qtde_dias_uteis]),
+				    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Meta Faturamento.1", each [Meta Faturamento] / [qtde_dias_uteis]),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Added Custom2",{"Meta Faturamento", "Meta Margem Bruta", "Meta Notas Emitidas"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns1",{{"Meta Notas Emitidas.1", "Meta Notas Emitidas"}, {"Meta Margem Bruta.1", "Meta Margem Bruta"}, {"Meta Faturamento.1", "Meta Faturamento"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns1",{{"Meta Notas Emitidas", Currency.Type}, {"Meta Margem Bruta", Currency.Type}, {"Meta Faturamento", Currency.Type}, {"qtde_dias_uteis", Int64.Type}, {"Data", type date}})
 				in
-				    #"Tipo Alterado2"
+				    #"Changed Type"
 
 	annotation PBI_NavigationStepName = Navegação
 
-	annotation PBI_ResultType = Exception
+	annotation PBI_ResultType = Table
 

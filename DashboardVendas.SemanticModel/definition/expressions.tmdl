@@ -5,3 +5,26 @@ expression PastaCaminhoArquivo = "C:\Users\Campeao Lub\OneDrive - Campeão Distr
 
 	annotation PBI_ResultType = Text
 
+expression fx_dias_uteis_mes = ```
+		let
+		    Source = (ano,mes) =>
+		
+		let
+		    //ano = 2022,
+		    //mes = 1, 
+		    Fonte = #"dCalendario",
+		    #"Linhas Filtradas" = Table.SelectRows(Fonte, each ([DiaSemana] <> 0 and [DiaSemana] <> 6)),
+		    #"Outras Colunas Removidas" = Table.SelectColumns(#"Linhas Filtradas",{ "Data", "Ano", "MesNum"}),
+		    tabela_filtrada = Table.SelectRows(#"Outras Colunas Removidas", each ([Ano] = ano) and ([MesNum] = mes)),
+		    #"Personalização Adicionada" = Table.AddColumn(tabela_filtrada, "qtde_dias_uteis", each Table.RowCount(tabela_filtrada))
+		in
+		    #"Personalização Adicionada"
+		in
+		    Source
+		```
+	lineageTag: 269d6e11-9310-4817-972d-ee8f31cb79f4
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+

@@ -1,0 +1,212 @@
+table dCalendario
+	lineageTag: 36a32094-aefa-4d31-b723-c88bc6645be1
+	dataCategory: Time
+
+	column Data
+		dataType: dateTime
+		isKey
+		formatString: Short Date
+		lineageTag: 524e503c-f5c3-4281-bd70-538152ec0cf3
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Ano
+		dataType: string
+		lineageTag: 17df91ed-9115-4b86-8fe0-a47135e48d77
+		summarizeBy: none
+		sourceColumn: Ano
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column NomeMes
+		dataType: string
+		lineageTag: 62b166d7-7754-47e4-8a55-eb230c914080
+		summarizeBy: none
+		sourceColumn: NomeMes
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesAbre
+		dataType: string
+		lineageTag: 7a870e05-fbe1-48c5-aee0-f96c78a9865d
+		summarizeBy: none
+		sourceColumn: MesAbre
+		sortByColumn: MesNum
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesAno
+		dataType: string
+		lineageTag: e211b092-7596-486e-b07c-8a3d037e618b
+		summarizeBy: none
+		sourceColumn: MesAno
+
+		annotation SummarizationSetBy = Automatic
+
+	column MesNum
+		dataType: double
+		lineageTag: 2f3581e7-9482-4f1a-9c5a-e82012fd97c4
+		summarizeBy: sum
+		sourceColumn: MesNum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AnoMesINT
+		dataType: double
+		lineageTag: aea2e433-bbaf-4fb2-aee5-081433053f33
+		summarizeBy: sum
+		sourceColumn: AnoMesINT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column InicioMes
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: cf5de6aa-097f-48d8-8c86-c3509328ffc2
+		summarizeBy: none
+		sourceColumn: InicioMes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 6712a6f5-54d0-4b5d-82b2-b92705581003
+		summarizeBy: sum
+		sourceColumn: Trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column TrimestreAbreviado
+		dataType: string
+		lineageTag: 75e2ba70-cda3-4978-afc4-26487925c76c
+		summarizeBy: none
+		sourceColumn: TrimestreAbreviado
+
+		annotation SummarizationSetBy = Automatic
+
+	column Bimestre
+		dataType: string
+		lineageTag: 91a411fd-241e-445f-854b-5c27beee5b73
+		summarizeBy: none
+		sourceColumn: Bimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semestre
+		dataType: string
+		lineageTag: e06409ca-785b-4fe8-8c05-6eb010203786
+		summarizeBy: none
+		sourceColumn: Semestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semana
+		dataType: int64
+		formatString: 0
+		lineageTag: e66aaac4-9016-4455-bfbf-19884e97614f
+		summarizeBy: sum
+		sourceColumn: Semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiaSemana
+		dataType: int64
+		formatString: 0
+		lineageTag: fb879377-c21e-4b8e-a986-ad28855eca7f
+		summarizeBy: sum
+		sourceColumn: DiaSemana
+
+		annotation SummarizationSetBy = Automatic
+
+	column NomeDia
+		dataType: string
+		lineageTag: bd307a3c-e692-48ce-9725-52495762c6dd
+		summarizeBy: none
+		sourceColumn: NomeDia
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCalendario = m
+		mode: import
+		source = ```
+				let
+				
+				//Alterar somente a Tabela e a coluna de datas
+				/* A Tabela é onde possui uma coluna Data que deseja usar em seus cálculos ou visuais. 
+				Exemplo. Tabela fVendas que possui a coluna Data Pedido Ficaria List.Min (fVendas[Data Pedido]).
+				Se Possuir mais de uma coluna ficaria List.Min (fVendas[Data Pedido] & fVendas[Data Vencimento]).
+				*/
+				
+				    MenorData = #date(2019, 1, 1),
+				    MaiorData = #date(2024, 12, 31),
+					
+				//Não alterar daqui pra baixo	
+					
+				    DataInicio = Date.StartOfYear(MenorData),
+				    DataFim = Date.EndOfYear(MaiorData),
+				    Dias = Duration.Days(DataFim- DataInicio) +1,
+				    ListarDatas = List.Dates(DataInicio, Dias, #duration(1,0,0,0)),
+				    Tabela = #table(
+				        type table[
+				            Data = date,
+				            Ano = Int64.Type,
+				            NomeMes = text,
+				            MesAbre = text,
+				            MesAno = text,
+				            MesNum = number,
+				            AnoMesINT = number,
+				            InicioMes = date,
+				            Trimestre = Int64.Type,
+				            TrimestreAbreviado = text,
+				            Bimestre = text,
+				            Semestre = text,
+				            Semana = Int64.Type,
+				            DiaSemana = Int64.Type,
+				            NomeDia = text 
+				        ],
+				        List.Transform(
+				            ListarDatas,
+				            each {
+				                _,
+				                Date.Year(_),
+				                Text.Proper( Date.MonthName(_)),
+				                Text.Proper(Text.Start(Date.MonthName(_), 3)),
+				                Text.Proper(Text.Start(Date.MonthName(_), 3)) & "-" & Text.End(Text.From(Date.Year(_)), 2),
+				                Date.Month(_),
+				                Date.Year(_) * 100 + Date.Month(_),
+				                Date.StartOfMonth(_),
+				                Date.QuarterOfYear(_),
+				                Text.From(Date.QuarterOfYear(_)) & "º Trim ",
+				                Text.From( Number.RoundUp( Date.Month(_)/2,0)) & "º Bim",
+				                Text.From( Number.RoundUp( Date.Month(_)/6,0)) & "º Sem",
+				                Date.WeekOfMonth(_),
+				                Date.DayOfWeek(_),
+				                Date.DayOfWeekName(_)
+				
+				            }
+				
+				        )
+				    )
+				in
+				    Tabela
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
