@@ -10,9 +10,15 @@ Quantidade de Vendas: Número de vendas por clientes etc.
 
 Margem bruta : A margem bruta é um indicador financeiro ao medir a diferença entre a receita total de vendas e o custo direto dos bens vendidos (CDV) etc.
 
-# Antes de Começar
- ao clonar o repositorio lembrese de colar o caminho das pasta **BaseDado** no parametro
+## Antes de Começar
+ Ao clonar o repositorio lembrese de colar o caminho das pasta **BaseDado** no parametro
 para que os dados sejam atualizados.
+
+Editar Parâmetros
+![Editar Parâmetros](https://github.com/Ricardo-Filgueiras/projeto-dashboard-comercial/blob/main/BaseDados/imagens/editarparametros.png)
+
+Colar Caminho
+![Colar Caminho](https://github.com/Ricardo-Filgueiras/projeto-dashboard-comercial/blob/main/BaseDados/imagens/colarcaminho.png)
 
 
 # Dashboard de Análise Comercial: Visão Clara e Estratégica das suas Vendas
