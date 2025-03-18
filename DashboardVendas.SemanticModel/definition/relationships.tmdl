@@ -18,3 +18,7 @@ relationship 71c78f99-40ad-42b6-c81a-8f5bc10312f3
 	fromColumn: fVendas.Data
 	toColumn: dCalendario.Data
 
+relationship 27bd6ffb-cfa2-439e-f44c-9f5f6515a9ae
+	fromColumn: dProduto.'Grupo Produto'
+	toColumn: ImagemGrupoProduto.'Grupo Produto'
+

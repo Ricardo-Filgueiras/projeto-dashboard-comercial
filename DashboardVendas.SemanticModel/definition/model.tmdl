@@ -6,11 +6,11 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["fVendas","dVendedor","dProduto","fMetas","PastaCaminhoArquivo","dCalendario","fx_dias_uteis_mes"]
+annotation PBI_QueryOrder = ["fVendas","dVendedor","dProduto","fMetas","PastaCaminhoArquivo","dCalendario","fx_dias_uteis_mes","ImagemGrupoProduto"]
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBIDesktopVersion = 2.139.2054.0 (24.12)+334ca1c95b576cc53924655643b0d36f21caac55
+annotation PBIDesktopVersion = 2.140.1577.0 (25.02)+00af0910c5ca19a229c472b0dfc17a2c488f6b0a
 
 annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
 
@@ -21,6 +21,7 @@ ref table fMetas
 ref table Medidas
 ref table auxMedidas
 ref table dCalendario
+ref table ImagemGrupoProduto
 
 ref cultureInfo pt-BR
 

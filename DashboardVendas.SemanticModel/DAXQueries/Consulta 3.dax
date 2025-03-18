@@ -1,6 +1,23 @@
 EVALUATE
-
+VAR _tab =
 CALCULATETABLE(
-	SUMMARIZE( fVendas  , dCcalendario[MesBrev] , dCcalendario[MesAnoBrev], dCcalendario[Ano] ,"vlr", SUM( fVendas[VendaTotal]) )
-	, dCcalendario[Ano] = 2020
-) ORDER BY [vlr] DESC
+	SUMMARIZE( fVendas  , dProduto[Grupo Produto], "vlr",CALCULATE( SUM( fVendas[VendaTotal]) , dCalendario[Ano] = "2020"
+	, dCalendario[MesAbre] = "Nov") )
+	, dCalendario[Ano] = "2020"
+	, dCalendario[MesAbre] = "Nov"
+) 
+VAR _rank = 
+ ADDCOLUMNS(
+	_tab
+	, "rank" 
+	, RANK(
+		SKIP
+		, ALLSELECTED( dProduto )
+		, ORDERBY( [vlr] , DESC  )
+		,
+	)
+ )
+
+
+
+RETURN _rank ORDER BY [vlr] DESC

@@ -15,7 +15,7 @@ table Medidas
 
 		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
 
-	measure 'Margfem bruta' = [faturamento] - [Custo Venda]
+	measure 'Margem bruta' = [faturamento] - [Custo Venda]
 		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
 		displayFolder: Medidas Base
 		lineageTag: 69358385-adb2-4612-b3f6-989bbdcc5cc7
@@ -58,7 +58,7 @@ table Medidas
 			
 			VAR _cal =
 			CALCULATE(
-			     [Margfem bruta] ,
+			     [Margem bruta] ,
 			     SAMEPERIODLASTYEAR( dCalendario[Data])
 			)
 			VAR _result = IF( _cal = BLANK() , " -- ", _cal )
@@ -156,12 +156,12 @@ table Medidas
 			
 			VAR _cal =
 			CALCULATE(
-			     [Margfem bruta] ,
+			     [Margem bruta] ,
 			     SAMEPERIODLASTYEAR( dCalendario[Data] )
 			)
 			
 			
-			RETURN DIVIDE( [Margfem bruta] - _cal , _cal )
+			RETURN DIVIDE( [Margem bruta] - _cal , _cal )
 		displayFolder: Ultimo Ano
 		lineageTag: cb4ed206-a546-4c91-8ca4-484eabef4add
 
@@ -192,7 +192,7 @@ table Medidas
 		displayFolder: Metas
 		lineageTag: 58060918-9597-40df-816e-141901cad329
 
-	measure 'Meta Margem bruta percent %' = DIVIDE( [Margfem bruta] , SUM( fMetas[Meta Margem Bruta] ))
+	measure 'Meta Margem bruta percent %' = DIVIDE( [Margem bruta] , SUM( fMetas[Meta Margem Bruta] ))
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: Metas
 		lineageTag: ac5ac259-b415-4339-95ff-921623a4f93e
@@ -209,6 +209,26 @@ table Medidas
 	measure MedidaMax = 150000
 		formatString: 0
 		lineageTag: b013c687-dd10-4226-a836-1fc2e7f59d1b
+
+	measure 'Principal item' = ```
+			
+			
+			VAR _rank = 
+			
+				 RANK(
+					SKIP
+					, ALLSELECTED( dProduto )
+					, ORDERBY( [faturamento] , DESC  )
+					,
+				)
+			 
+			
+			
+			
+			RETURN _rank
+			```
+		formatString: 0
+		lineageTag: ed24d8a5-f736-42e5-b42b-be4166102371
 
 	column Value
 		isHidden

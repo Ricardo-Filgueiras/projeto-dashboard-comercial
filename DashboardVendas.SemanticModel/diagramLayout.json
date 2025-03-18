@@ -77,6 +77,16 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "ImagemGrupoProduto",
+          "nodeLineageTag": "bd6ee339-6409-4307-a3cf-8dcc5f53e7f8",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Todas as tabelas",
@@ -160,6 +170,47 @@
       ],
       "name": "Layout 1",
       "zoomValue": 79.553182037699813,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 2,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 200,
+            "y": 205
+          },
+          "nodeIndex": "dProduto",
+          "nodeLineageTag": "83cf6d09-02c0-45c3-adcd-6b39a3dbef65",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 761,
+            "y": 437
+          },
+          "nodeIndex": "ImagemGrupoProduto",
+          "nodeLineageTag": "bd6ee339-6409-4307-a3cf-8dcc5f53e7f8",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Layout 2",
+      "zoomValue": 100,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,
