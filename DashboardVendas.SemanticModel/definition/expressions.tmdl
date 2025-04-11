@@ -1,4 +1,4 @@
-expression PastaCaminhoArquivo = "C:\Users\Ricar\OneDrive\Documentos\GitHub\projeto-dashboard-comercial\BaseDados\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+expression PastaCaminhoArquivo = "C:\Users\Campeao Lub\OneDrive - Campeão Distribuição e Logística Ltda\Documentos\GitHub\projeto-dashboard-comercial\BaseDados\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: a45f265f-8d13-4a44-84ea-133fa385cf2f
 
 	annotation PBI_NavigationStepName = Navegação
