@@ -1,0 +1,111 @@
+table tEixo
+	lineageTag: 2d1d4263-4ec0-4cfb-a4ac-dc193deea327
+
+	measure '000. dif' = CALCULATE( [fat] - [Meta Faturamentro], REMOVEFILTERS( tEixo ))
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: fd20644c-c55d-417c-81e5-193ca8a8eff0
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '000. dif Percentil %' = CALCULATE( DIVIDE([fat] , [Meta Faturamentro],0) - 1, REMOVEFILTERS( tEixo ))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: d0a06155-c26c-40f7-9978-f0a46dfe4e82
+
+	measure '001 real YTD' =
+			
+			CALCULATE(
+			     TOTALYTD( [fat], dCalendario[Data] )
+			     , dCalendario[DataComVendas] = TRUE()
+			)
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 06058316-d571-453f-9362-0d2bd2f87987
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '001 Meta YTD' =
+			
+			CALCULATE(
+			     TOTALYTD( [Meta Faturamentro], dCalendario[Data] )
+			     , dCalendario[DataComVendas] = TRUE()
+			)
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: aedbb2f6-4941-44d6-b9c9-6145f01114b3
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure '003. Colunas' = ```
+			
+			VAR _contexto = SELECTEDVALUE( tEixo[Id] )
+			VAR _Real_fixo = CALCULATE( [001 real YTD], REMOVEFILTERS( tEixo ) )
+			VAR _Meta_fixo = CALCULATE( [001 Meta YTD], REMOVEFILTERS( tEixo ) )
+			VAR _caso = 
+			    SWITCH(
+			        _contexto,
+			        15, _Meta_fixo,
+			        13, _Real_fixo
+			    )
+			
+			RETURN 
+			    _caso
+			```
+		lineageTag: f54885cf-fec3-4e9e-880f-4a1f07f21cdb
+
+		formatStringDefinition =
+				VAR _valor = SELECTEDMEASURE()
+				RETURN
+				    """" &
+				            SWITCH( TRUE(),
+				            ABS( _valor ) >=  1E9, FORMAT( _valor , "##,,,.00 B; -#,,,.0  B; -"),
+				            ABS( _valor ) >=  1E6, FORMAT( _valor , "##,,.00 M; -#,,.0  M; -"),
+				            ABS( _valor ) >=  1E3, FORMAT( _valor , "##,.00 K; -#,.0  K; -"),
+				            FORMAT( _valor , "#;-#;-")
+				            )
+				    & """"
+
+	column X
+		lineageTag: d9cbb1f9-6fd0-422b-87e2-dc6f73616f44
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [X]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Id
+		lineageTag: 1e5e9bee-3980-4584-9982-6fc4c716cb6b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Id]
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition tEixo = calculated
+		mode: import
+		source = ```
+				
+				VAR _Meses = 
+				
+				    ALL( dCalendario[MesAbre], dCalendario[MesNum])
+				    
+				
+				VAR _coomplemeto =
+				DATATABLE(
+				    "X", STRING,
+				    "Id", INTEGER,
+				    {
+				        {"Meta", 15},
+				        {"", 14},
+				        {"Realizado",13}
+				    }
+				)
+				
+				VAR unindo = UNION(
+				    _coomplemeto,
+				    _Meses
+				)
+				RETURN  unindo
+				```
+
+	annotation PBI_Id = 567c759dca794d94bb463449019519e0
+

@@ -534,6 +534,16 @@
               "solid": {
                 "color": "#FFFFFF"
               }
+            },
+            "titleFontColor": {
+              "solid": {
+                "color": "#828282"
+              }
+            },
+            "valueFontColor": {
+              "solid": {
+                "color": "#343333"
+              }
             }
           }
         ],
@@ -548,6 +558,25 @@
               "solid": {
                 "color": "#3F6BC4"
               }
+            },
+            "titleFontColor": {
+              "solid": {
+                "color": "#828282"
+              }
+            }
+          }
+        ],
+        "visualHeader": [
+          {
+            "background": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "border": {
+              "solid": {
+                "color": "#060606"
+              }
             }
           }
         ]
@@ -556,16 +585,16 @@
   },
   "textClasses": {
     "label": {
-      "color": "#FFFFFF"
+      "color": "#1B1B1B"
     },
     "callout": {
-      "color": "#F4F4F4"
+      "color": "#595959"
     },
     "title": {
-      "color": "#F9F6F6"
+      "color": "#3D3A3A"
     },
     "header": {
-      "color": "#FFFFFF"
+      "color": "#565555"
     }
   },
   "foreground": "#EEEEEE",

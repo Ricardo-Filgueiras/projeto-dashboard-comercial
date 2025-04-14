@@ -22,6 +22,7 @@ ref table Medidas
 ref table auxMedidas
 ref table dCalendario
 ref table ImagemGrupoProduto
+ref table tEixo
 
 ref cultureInfo pt-BR
 

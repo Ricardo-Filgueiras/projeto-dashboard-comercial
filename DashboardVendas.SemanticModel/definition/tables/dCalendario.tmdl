@@ -54,10 +54,10 @@ table dCalendario
 	column MesNum
 		dataType: double
 		lineageTag: 2f3581e7-9482-4f1a-9c5a-e82012fd97c4
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: MesNum
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
@@ -128,16 +128,23 @@ table dCalendario
 		dataType: int64
 		formatString: 0
 		lineageTag: fb879377-c21e-4b8e-a986-ad28855eca7f
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: DiaSemana
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column NomeDia
 		dataType: string
 		lineageTag: bd307a3c-e692-48ce-9725-52495762c6dd
 		summarizeBy: none
 		sourceColumn: NomeDia
+
+		annotation SummarizationSetBy = Automatic
+
+	column DataComVendas = MAX( fVendas[Data] ) >= dCalendario[Data]
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 68e09553-7de8-4102-8341-f0058bccbdf2
+		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 

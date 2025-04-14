@@ -306,6 +306,13 @@ table Medidas
 		lineageTag: 6e3c238c-3502-4bb3-a26e-0ae8aef74714
 		dataCategory: ImageUrl
 
+	measure fat = SUM( fVendas[VendaTotal])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		displayFolder: Medidas Base
+		lineageTag: 06e0afce-448a-4e47-b68e-cb48e228f255
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
 	column Value
 		isHidden
 		formatString: 0
